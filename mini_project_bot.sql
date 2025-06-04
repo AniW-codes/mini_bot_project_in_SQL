@@ -72,19 +72,19 @@ select
 			SUM(CASE
 				When points < 0 then 1
 				else 0
-			END) as incorrect_responses_per_day,
+				END) as incorrect_responses_per_day,
 			SUM(CASE
 				When points < 0 then points
 				else 0
-			END) as points_lost_to_incorrect_responses,
+				END) as points_lost_to_incorrect_responses,
 			SUM(CASE
 				When points > 0 then 1
 				else 0
-			END) as correct_responses_per_day,
+				END) as correct_responses_per_day,
 			SUM(CASE
 				When points > 0 then points
 				else 0
-			END) as points_won_to_correct_responses_per_day,
+				END) as points_won_to_correct_responses_per_day,
 			sum(points) as total_points
 from user_submissions
 group by 1
@@ -96,7 +96,7 @@ LIMIT 5;
 
 -- Q.5 Find the top 10 performers for each week.
 
-With CTE_Weekly
+With CTE_Weekly		 --CTE 1
 as
 		(select
 				EXTRACT(WEEK from submitted_at) as week_no,
@@ -105,7 +105,7 @@ as
 		from user_submissions
 		group by 1,2)
 ,
-CTE_Rank
+CTE_Rank 			--CTE 2
 as
 		(select 
 				username,
